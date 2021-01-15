@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <%- include('./partials/head'); %>
+</head>
+<body class="container">
+<header>
+    <%- include('./partials/header.ejs'); %>
+</header>
+
+<main>
+    <div style="padding-top: 30px; width: 70%; margin: 0 auto; display: block"> 
+        <div>
+            
+        </div>
+        <div class="jumbotron" >
+            <h1>Welcome to the Curse Generator! </h1>
+            <p>Have fun cursing!</p>
+            <form method="get" action="/generate" >
+                <div class="form-group">
+                    <label for="type">What are you looking for?</label>
+                    <select class="form-control" name="type" id="type">
+                        <option value="insult">Insults! - I wanna curse someone out!</option>
+                        <option value="exclamation">Exclamations! - I'm frustrated! </option>
+                    </select>
+                </div>
+                <div class=form-group>
+                    <label for="rating"> Choose your profanity level: </label>
+                    <select class="form-control" name="rating" id="rating">
+                        <option value="PG">PG</option>
+                        <option value="R">Rated R</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-danger">Gimme the profanity!</button>
+            </form>
+            
+        </div>
+    </div>
+
+</main>
+
+<footer class="footer">
+    <%- include('./partials/footer'); %>
+</footer>
+
+</body>
+</html>

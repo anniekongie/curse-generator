@@ -1,0 +1,18 @@
+{
+  "name": "curse-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Annie Kong",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.827.0",
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security"
+  }
+}

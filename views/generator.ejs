@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head'); %>
+    <style>
+        .form-control {
+            min-width: 200px;
+            width: 20rem;
+            margin: 0 auto;
+            min-height: 3.5rem;
+            height: fit-content;
+            margin-bottom: 30px;
+            display: block;
+            word-wrap: break-word;
+
+        }
+        .card {
+            margin: 0 auto;
+            display: block;
+        }
+        .card-body {
+            height: 10rem;
+        }
+        .card {
+            width: 30%;
+        }
+    </style>
+</head>
+<body class="container">
+
+<header>
+    <%- include('./partials/header.ejs'); %>
+</header>
+
+<main>
+    <div class="main" style="text-align: center; align-content: center;">
+        <div class="card text-white bg-danger mb-3" style="width: 27rem; max-width: 40rem; margin-top:7%;">
+            <div class="card-body">
+                <% if(type=="insult"){ %>
+                    <h2 class="card-text">You</h2>
+                  <% } else{ %>  
+                    <h2 class="card-text"></h2>
+                 <% } %>
+                 <div class="form-control form-control-lg">
+                    <% if (result) { %>
+                        <h2 class="card-text"><%= result %></h2>
+                      <% } %>
+                </div>
+            </div>
+          </div>
+        
+        <form action="" method="post">
+            <button type="submit" class="btn btn-danger" name="generate" id="generate">Generate!</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <%- include('./partials/footer'); %>
+</footer>
+
+</body>
+</html>
