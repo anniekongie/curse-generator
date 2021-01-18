@@ -1,6 +1,7 @@
 var AWS = require('aws-sdk');
 var express = require('express');
 var bodyParser = require('body-parser');
+// var cors = require('cors');
 var fs = require('fs');
 AWS.config.region = process.env.REGION;
 
@@ -12,7 +13,7 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-
+// app.use(cors());
 const loadWords = async function () {
     await fs.readdir('static', (err, files) => {
         try {
@@ -59,7 +60,9 @@ const generate = async (type, rating) => {
     }
 })();
 
+app.get('/', (req, res) => {res.send('Are you cussin\' me? ')})
 app.post('/generate', async function (req, res) {
+    console.log(req)
     var lookingFor = {
         type: req.body.type,
         rating: req.body.rating,
