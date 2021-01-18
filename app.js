@@ -1,7 +1,7 @@
 var AWS = require('aws-sdk');
 var express = require('express');
 var bodyParser = require('body-parser');
-// var cors = require('cors');
+var cors = require('cors');
 var fs = require('fs');
 AWS.config.region = process.env.REGION;
 
@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-// app.use(cors());
+app.use(cors());
 const loadWords = async function () {
     await fs.readdir('static', (err, files) => {
         try {
