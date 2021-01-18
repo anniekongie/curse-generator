@@ -4,16 +4,14 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 AWS.config.region = process.env.REGION;
 
-// var ddb = new AWS.DynamoDb();
-// var insultTable = process.env.INSULT_TABLE;
-
 var app = express();
 var port = process.env.PORT || 8081;
 var dictionary = { adultCurseWords: [], adultInsults: [], pgInsults: [], pgCurseWords: [] };
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
 
 const loadWords = async function () {
     await fs.readdir('static', (err, files) => {
@@ -61,50 +59,18 @@ const generate = async (type, rating) => {
     }
 })();
 
-// homePage
-app.get('/', function (req, res) {
-    res.render('index', {
-        static_path: 'static',
-    });
-});
-
-app.get('/about', function (req, res) {
-    res.render('about', {
-        static_path: 'static',
-    })
-})
-
-app.get('/generate', function (req, res) {
-    var lookingFor = {
-        type: req.query.type,
-        rating: req.query.rating,
-    }
-    console.log('The user is looking for', lookingFor.rating, lookingFor.type);
-    res.render('generator', {
-        type: lookingFor.type,
-        rating: lookingFor.rating,
-        result: null,
-        static_path: 'static',
-    })
-});
-
 app.post('/generate', async function (req, res) {
     var lookingFor = {
-        type: req.query.type,
-        rating: req.query.rating,
+        type: req.body.type,
+        rating: req.body.rating,
     }
     try {
-        await generate(lookingFor.type, lookingFor.rating).then(result=> {
-            res.render('generator', {
-                type: lookingFor.type,
-                rating: lookingFor.rating,
-                result: result,
-                static_path: 'static',
-            })
+        await generate(lookingFor.type, lookingFor.rating).then(result => {
+            res.status(200).send(result)
         })
     } catch (error) {
         return console.log(error);
     }
 })
 
-var server = app.listen(port);
+var server = app.listen(port, () => console.log(`Server listening on port ${port}`));
